@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Datatable</title>
+</h:head>
+<h:body>
+	<h1>dataTable</h1>
+
+	<h:form id="form">
+		<p:growl id="msgs" showDetail="true" />
+
+		<p:dataTable id="cars" var="car" value="#{dtBasicView.cars}" rows="10"
+			paginator="true" editable="true" style="margin-bottom:20px"
+			rowKey="#{car.ref}" selection="#{dtBasicView.selectedCar}"
+			selectionMode="single">
+			
+			<p:column headerText="Ref">
+				<h:outputText value="#{car.ref}" />
+			</p:column>
+
+
+			<p:column headerText="name">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{car.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{car.name}" style="width:100%" label="Name" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+
+			<p:column style="width:32px;text-align: center">
+				<p:commandButton update=":form:carDetail"
+					oncomplete="PF('carDialog').show()" icon="ui-icon-search"
+					title="View">
+					<f:setPropertyActionListener value="#{car}"
+						target="#{dtBasicView.selectedCar}" />
+				</p:commandButton>
+			</p:column>
+
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+
+		</p:dataTable>
+
+
+		<p:contextMenu for="cars">
+			<p:menuitem value="Delete" update="cars" icon="ui-icon-close"
+				actionListener="#{dtBasicView.deleteCar}" />
+		</p:contextMenu>
+
+		<p:dialog header="Car Info" widgetVar="carDialog" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="carDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty dtBasicView.selectedCar}"
+					columnClasses="label,value">
+
+					<h:outputText value="Ref:" />
+					<h:outputText value="#{dtBasicView.selectedCar.ref}" />
+
+					<h:outputText value="Name" />
+					<h:outputText value="#{dtBasicView.selectedCar.name}" />
+
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

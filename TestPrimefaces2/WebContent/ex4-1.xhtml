@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Datatable</title>
+</h:head>
+<h:body>
+	<h1>dataTable</h1>
+
+		<p:dataTable var="car" value="#{dtBasicView.cars}">
+		
+			<p:column headerText="Id">
+				<h:outputText value="#{car.id}" />
+			</p:column>
+	
+			<p:column headerText="Brand">
+				<h:outputText value="#{car.brand}" />
+			</p:column>
+			
+		</p:dataTable>
+
+</h:body>
+</html>

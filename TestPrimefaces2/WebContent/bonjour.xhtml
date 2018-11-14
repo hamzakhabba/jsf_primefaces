@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>HELLO</title>
+</h:head>
+<h:body>
+	<h1>HELLO - bonjour.xhtml</h1>
+	<h:form>
+	
+			<h:inputText id="t1" value="#{bonjourBean.nom}"
+				validatorMessage="message 1" required="true" requiredMessage="message 1">
+				<f:validateLength minimum="5" maximum="10"/>
+				<h:message for="t1" style="color:red" />
+			</h:inputText>
+			<h:commandButton value="Souhaiter la bienvenue" action="bienvenue" />
+		
+	</h:form>
+</h:body>
+</html>
